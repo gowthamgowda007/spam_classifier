@@ -58,9 +58,7 @@ df['target'].value_counts()
 
 plt.pie(df['target'].value_counts(), labels=['ham','spam'],autopct='%0.2f')
 
-!pip install nltk
-import nltk
-nltk.download('punkt')
+
 
 df['number_of_characters']=df['text'].apply(len)
 
@@ -121,11 +119,6 @@ def transform_text(text):
       y.append(ps.stem(i))
 
     return " ".join(y)
-
-!pip install nltk
-import nltk
-nltk.download('stopwords')
-nltk.download('punkt')
 
 from nltk.stem.porter import PorterStemmer
 ps = PorterStemmer()
@@ -247,10 +240,6 @@ for name, clf in clfs.items():
 performance_df=pd.DataFrame({'Algorithm':clfs.keys(),'Accuracy':accuracy_scores,'Precision':precision_scores}).sort_values('Precision',ascending=False)
 performance_df
 
-import pickle
-pickle.dump(tfidf,open('vectorizer.pkl','wb'))
-pickle.dump(mnb,open('model.pkl','wb'))
-
 import nltk
 
 # Ensure Punkt tokenizer is downloaded
@@ -258,3 +247,7 @@ try:
     nltk.data.find('tokenizers/punkt')
 except LookupError:
     nltk.download('punkt')
+
+import pickle
+pickle.dump(tfidf,open('vectorizer.pkl','wb'))
+pickle.dump(mnb,open('model.pkl','wb'))
